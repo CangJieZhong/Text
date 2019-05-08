@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 扫描注解 -->
+	<context:component-scan base-package="dao,service" />
+	<!-- 加载文件 -->
+	<context:property-placeholder
+		file-encoding="UTF-8" location="classpath:db.properties" />
+	<!-- 使用c3p0连接池的数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- C3p0的属性注入 -->
+		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.user}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<!-- 连接的参数 -->
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>
+		<property name="acquireIncrement" value="${jdbc.acquireIncrement}"></property>
+		<property name="minPoolSize" value="${jdbc.minPoolSize}"></property>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+	</bean>
+	<!-- 配置SqlSessionFactory  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 加载mybatis-config.xm配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!-- 加载Mapper映射文件 -->
+		<property name="mapperLocations"  value="classpath*:/mapper/*Mapper.xml"></property>
+	</bean>
+	
+	
+	<!--Mapper的扫描器: 生产Mapper代理实现类对象 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描Mapper接口包路径,如果有多个包,用英文的逗号分隔 -->
+		<property name="basePackage" value="dao"></property>
+		<!-- 如果没有把数据库的参数写在properties文件中 -->
+		<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
+		
+		<!-- 如果使用properties文件,一定不能使用上面写法 -->
+		<property name="sqlSessionFactoryBeanName"  value="sqlSessionFactory"></property>
+	</bean>
+	<!-- 配置事务管理器: 处理事务的类 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 注入dataSource -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+	<!-- 指定事务的策略 transaction-manager: 该事务策略交给那个事务管理器, 默认值 transactionManager 
+		如果事务管理器的bean的name/id不是transactionManager, 一定使用transaction-manager 设置关联的事务管理器 
+		如果事务管理器的bean的name/id是transactionManager,可以省略transaction-manager -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<!-- 指定事务的规则 -->
+		<tx:attributes>
+			<!-- 具体对某个业务层某个方法的事务规则 name: 方法名(模糊) name="query*" 表示方法名以query开头的 read-only: 
+				是否只读,默认值:false, 不是只读, 可写可读(增删改设置为false), 查询: true 效率更高 isolation="DEFAULT": 
+				设置数据库的隔离级别, defalut: 默认是数据库默认隔离级别 oracle: 读已提交的隔离级别 rollback-for="java.lang.SQLException": 
+				表示发送SQLException进行回滚事务, 不写:默认, 只要异常,就回滚 no-rollback-for="java.lang.RuntimeException" 
+				: 排除指定的异常,不回滚 timeout: 超时,默认-1: 永不超时, oracle 数据库永不超时 -->
+			<tx:method name="query*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="find*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="get*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="select*" read-only="true" propagation="SUPPORTS" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 定义切面 : 把事务管理添加到哪些类上 -->
+	<aop:config>
+		<!-- 定义切入点 execution(* service..*.*(..)) * 返回值类型, 任意的返回值类型 service.*.*() 
+			service 包.类.方法名 service包下所有类所有方法 service..*.*() : service包以及子包下所有的类所有的方法 
+			(..) 参数任意 -->
+		<aop:pointcut expression="execution(* service..*.*(..))" id="pointcut" />
+		<!--织入 将事务增强与切入点组合 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
+	</aop:config>
+</beans>

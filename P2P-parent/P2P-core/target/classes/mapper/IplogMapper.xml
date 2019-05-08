@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.IplogMapper">
+
+    <insert id="insert" parameterType="Iplog">
+       <choose>
+        <when test="logininfoid != null">
+            INSERT INTO `p2p`.`iplog` (
+              `ip`,
+              `loginstate`,
+              `username`,
+              `logininfoid`,
+              `logintype`,
+              `logintime`
+            ) 
+            VALUES
+              (
+                #{ip},
+                #{loginstate},
+                #{username},
+                #{logininfoid},
+                #{logintype},
+                #{logintime}
+              ) 
+        
+        </when>
+        <otherwise>
+             INSERT INTO `p2p`.`iplog` (
+             `ip`,
+             `loginstate`,
+             `username`,
+             `logintime`,
+              `logintype`
+           ) 
+           VALUES
+             (
+               #{ip},
+               #{loginstate},
+               #{username},
+               #{logintime},
+               #{logintype}
+             ) 
+        </otherwise>
+       </choose>
+    </insert>
+</mapper>
