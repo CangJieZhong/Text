@@ -33,7 +33,7 @@ public class LogininfoServiceImpl implements ILogininfoService {
 	
 	
 	@Override
-	public boolean login(String username, String password, int  usertype, String ip)  throws  LoginInfoException {
+	public boolean login(String username, String password, int  usertype, String ip)  throws  Exception {
 		Iplog iplog = new Iplog();
 		iplog.setIp(ip);
 		iplog.setLogintime(new Date());
@@ -61,13 +61,13 @@ public class LogininfoServiceImpl implements ILogininfoService {
 
 
 	@Override
-	public boolean checkUsername(String username, int usertype) {
+	public boolean checkUsername(String username, int usertype) throws Exception {
 		return logininfoMapper.getCountByUsername(username,usertype) <=  0;
 	}
 
 
 	@Override
-	public void register(String username, String password) {
+	public void register(String username, String password) throws Exception {
 		if(checkUsername(username,Logininfo.USERTYPE_NORMAL) == false){
 			//用户名存在
 			throw  new RuntimeException("用户名已存在");

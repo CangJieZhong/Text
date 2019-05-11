@@ -19,7 +19,7 @@ public class UserinfoController {
 	private ILogininfoService logininfoService;
 	@RequestMapping(path="/login.action",method=RequestMethod.POST)
 	@ResponseBody
-	public JsonResult  login(String username,String password,HttpServletRequest request){
+	public JsonResult  login(String username,String password,HttpServletRequest request) throws Exception{
 		JsonResult json = new JsonResult();
 		try {
 			boolean isOk = logininfoService.login(username, password, Logininfo.USERTYPE_NORMAL, request.getRemoteAddr());

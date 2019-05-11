@@ -12,6 +12,7 @@ D:\MyGit\P2P-parent\P2P-core\src\main\java\util\JsonResult.java
 D:\MyGit\P2P-parent\P2P-core\src\main\java\pojo\Userinfo.java
 D:\MyGit\P2P-parent\P2P-core\src\main\java\dao\AccountMapper.java
 D:\MyGit\P2P-parent\P2P-core\src\main\java\pojo\Account.java
+D:\MyGit\P2P-parent\P2P-core\src\main\java\util\MailUtil.java
 D:\MyGit\P2P-parent\P2P-core\src\main\java\dao\UserinfoMapper.java
 D:\MyGit\P2P-parent\P2P-core\src\main\java\exception\LoginInfoException.java
 D:\MyGit\P2P-parent\P2P-core\src\main\java\util\MD5.java

@@ -4,10 +4,11 @@ import java.util.Map;
 
 public interface IPersonalService {
 
-	Map<String, Object> queryPersonal();
+	Map<String, Object> queryPersonal() throws Exception;
 
-	void updatePhoneNumber(String phoneNumber);
+	void updatePhoneNumber(String phoneNumber) throws Exception;
 
-	Map<String, Object> checkOrSaveEmail(String email);
+	void saveEmail(String email,String code) throws Exception;
 	
+	Map<String, Object> checkEmail(String email) throws Exception;
 }
