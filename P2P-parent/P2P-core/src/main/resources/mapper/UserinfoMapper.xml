@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.UserinfoMapper">
+
+	<insert id="insert" parameterType="Userinfo">
+
+		INSERT INTO `p2p`.`userinfo` (
+		`id`,
+		`version`,
+		`bitState`,
+		`realName`,
+		`idNumber`,
+		`phoneNumber`,
+		`incomeGrade_id`,
+		`marriage_id`,
+		`kidCount_id`,
+		`educationBackground_id`,
+		`authScore`,
+		`houseCondition_id`,
+		`realauthid`,
+		`email`
+		)
+		VALUES
+		(
+		#{id},
+		#{version},
+		#{bitState},
+		#{realName},
+		#{idNumber},
+		#{phoneNumber},
+		#{incomeGrade.id},
+		#{marriage.id},
+		#{kidCount.id},
+		#{educationBackground.id},
+		#{authScore},
+		#{houseCondition.id},
+		#{realauthid},
+		#{email}
+		)
+	</insert>
+	<select id="queryUserInfoById" resultType="Userinfo">
+		SELECT * FROM userinfo
+		WHERE id=#{id}
+	</select>
+	<update id="updatePhoneNumber">
+		UPDATE userinfo SET phoneNumber=#{phoneNumber}, bitState=#{state} WHERE id=#{id}
+	</update>
+	<select id="queryEmailInfo" resultType="int">
+		SELECT COUNT(1) FROM userinfo WHERE email =#{email}
+	</select>
+	<update id="addEmail">
+		UPDATE userinfo SET email =#{email} , bitState=#{state} WHERE id=#{id}
+	</update>
+</mapper>

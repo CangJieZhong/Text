@@ -7,8 +7,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>蓝源Eloan-P2P平台</title>
 		<%@ include file="common/links-tpl.jsp"  %>
-		<link type="text/css" rel="stylesheet" href="/css/account.css" />
-		<script type="text/javascript" src="/js/plugins/jquery.form.js"></script>
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/css/account.css" />
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/plugins/jquery.form.js"></script>
 		<script>
 			$(function(){
 			//提交表单

@@ -1,37 +1,36 @@
 package web;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import exception.LoginInfoException;
 import pojo.Logininfo;
-import service.UserService;
+import service.ILogininfoService;
+import util.JsonResult;
 
 @RestController
 public class UserinfoController {
-	Map<Object, Object> map;
 	@Autowired
-	private UserService userService;
-	@RequestMapping("/login.action")
-	public Map<Object, Object> login(String username,String password,HttpServletRequest request) throws Exception{
-		map = new HashMap<>();
+	private ILogininfoService logininfoService;
+	@RequestMapping(path="/login.action",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonResult  login(String username,String password,HttpServletRequest request){
+		JsonResult json = new JsonResult();
 		try {
-			boolean user =  userService.login(username, password,Logininfo.USERTYPE_SYSTEM,request.getRemoteAddr());
-			if(user){
-				map.put("success", true);
-			}else{
-				map.put("msg", "用户名或者密码错误");
+			boolean isOk = logininfoService.login(username, password, Logininfo.USERTYPE_NORMAL, request.getRemoteAddr());
+			if(isOk == false){
+				json.setSuccess(false);
+				json.setMsg("用户名或者密码错误");
 			}
 		} catch (LoginInfoException e) {
-			// TODO Auto-generated catch block
-			map.put("msg", e.getMessage());
+			json.setSuccess(false);
+			json.setMsg(e.getMessage());
 		}
-		return map;
+		return json;
 	}
 }

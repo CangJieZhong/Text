@@ -4,9 +4,7 @@
 <mapper namespace="dao.IplogMapper">
 
     <insert id="insert" parameterType="Iplog">
-       <choose>
-        <when test="logininfoid != null">
-            INSERT INTO `p2p`.`iplog` (
+       INSERT INTO `p2p`.`iplog` (
               `ip`,
               `loginstate`,
               `username`,
@@ -23,25 +21,8 @@
                 #{logintype},
                 #{logintime}
               ) 
-        
-        </when>
-        <otherwise>
-             INSERT INTO `p2p`.`iplog` (
-             `ip`,
-             `loginstate`,
-             `username`,
-             `logintime`,
-              `logintype`
-           ) 
-           VALUES
-             (
-               #{ip},
-               #{loginstate},
-               #{username},
-               #{logintime},
-               #{logintype}
-             ) 
-        </otherwise>
-       </choose>
     </insert>
+    <select id="querylastLoginTimeById" resultType="java.util.Date">
+    	SELECT MAX(logintime) FROM iplog WHERE logininfoid=#{id}
+    </select>
 </mapper>

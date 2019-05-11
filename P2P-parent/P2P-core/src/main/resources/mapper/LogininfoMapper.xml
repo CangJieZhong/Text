@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.LogininfoMapper">
+
+    <select id="queryByUsernameAndPassword" resultType="Logininfo">
+        select <include refid="selectColumn"/> from logininfo where username = #{username} 
+                and password = #{password}
+                and usertype = #{usertype}
+    </select>
+    
+    <sql  id="selectColumn">
+        id, username,password,state,usertype
+    </sql>
+    
+    
+     <select id="getCountByUsername" resultType="int">
+        select count(1) from logininfo where username = #{username} 
+                and usertype = #{usertype}
+    </select>
+    
+    <!--useGeneratedKeys: 使用了主键生产策略:  自增,  true,  把生产的id赋值给对应的属性
+        keyProperty: 主键对应的属性名
+      -->
+    
+    <insert id="insert" parameterType="Logininfo"  useGeneratedKeys="true"  keyProperty="id">
+        insert into  logininfo(username,password,state,usertype)  
+            values(#{username},#{password},#{state},#{usertype})
+    </insert>
+</mapper>

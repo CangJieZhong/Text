@@ -7,8 +7,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import pojo.Logininfo;
 /**
- * 封装获取session,以及往HttpSession存放数据
- * @author suke
+ * 封装获取HttpSession,以及往HttpSession存放数据
+ * @author cangjie
  *
  */
 public class UserContext {
