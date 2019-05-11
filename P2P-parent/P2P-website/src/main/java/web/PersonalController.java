@@ -3,6 +3,7 @@ package web;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.IPersonalService;
+import util.MailUtil;
 import util.SimpleHttpClient;
 
 @Controller
@@ -20,7 +22,7 @@ public class PersonalController {
 	private IPersonalService personalService;
 	
 	@RequestMapping(path = "/personal.action")
-	public String personal(HttpServletRequest request) {
+	public String personal(HttpServletRequest request) throws Exception {
 		Map<String, Object> map = personalService.queryPersonal();
 		request.setAttribute("account", map.get("account"));
 		request.setAttribute("date", map.get("lastLoginTime"));
@@ -52,7 +54,7 @@ public class PersonalController {
 	}
 	@RequestMapping("/savePhoneNumber.action")
 	@ResponseBody
-	public Map<String, Object> savePhoneNumber(HttpServletRequest request,String code,String phoneNumber){
+	public Map<String, Object> savePhoneNumber(HttpServletRequest request,String code,String phoneNumber) throws Exception{
 		Map<String, Object> map = new HashMap<>();
 		Map<String, String> userPhoneMsg = (Map<String, String>) request.getSession().getAttribute("userPhoneMsg");
 		if(code.equals(userPhoneMsg.get("sendMessage"))&&phoneNumber.equals(userPhoneMsg.get("phoneNumber"))){
@@ -63,9 +65,20 @@ public class PersonalController {
 		}
 		return map;
 	}
-	@RequestMapping("/checkOrSaveEmail.action")
+	@RequestMapping("/checkEmail.action")
 	@ResponseBody
-	public Map<String, Object> checkOrSaveEmail(String email){
-		return personalService.checkOrSaveEmail(email);
+	public Map<String, Object> checkEmail(HttpServletRequest request,String email) throws Exception{
+		return personalService.checkEmail(email);
+	}
+	@RequestMapping("/saveEmail.action")
+	public String saveEmail(HttpServletRequest request,String email,String code) throws Exception{
+		
+			try {
+				personalService.saveEmail(email,code);
+				return "forward:personal.action";
+			} catch (Exception e) {
+				request.setAttribute("error", "系统出现了故障,请稍后重试");
+				return "forward:error.jsp";
+			}
 	}
 }

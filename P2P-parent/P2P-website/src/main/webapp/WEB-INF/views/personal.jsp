@@ -113,10 +113,11 @@
 									alert("邮箱格式不对!");
 								} else {
 									$.ajax({
-										url : "checkOrSaveEmail.action?email="
+										url : "checkEmail.action?email="
 												+ email,
 										success : function(data) {
 											if (data.success) {
+												alert("请在关闭会话前去邮箱确认你的邮箱地址才能保存成功哦!")
 												$("#bindEmail").attr(
 														"disabled", false);
 											} else {//返回的是错误信息或保存失败了
