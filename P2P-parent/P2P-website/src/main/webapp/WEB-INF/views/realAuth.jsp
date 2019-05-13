@@ -83,7 +83,7 @@
 				//指定uploadify的那个falsh文件的位置
 				swf:"<%=request.getContextPath() %>/js/plugins/uploadify/uploadify.swf",
 				//后台用来处理上传文件的地址;
-				uploader:"realAuth_upload.do",
+				uploader:"realAuth_upload.action",
 				//覆盖默认的效果
 				overrideEvents:['onUploadSuccess','onSelect'],
 				//上传成功之后回显    /uploda/xxxx.jpg
@@ -103,7 +103,7 @@
 				//指定uploadify的那个falsh文件的位置
 				swf:"<%=request.getContextPath() %>/js/plugins/uploadify/uploadify.swf",
 				//后台用来处理上传文件的地址;
-				uploader:"realAuth_upload.do",
+				uploader:"realAuth_upload.action",
 				//覆盖默认的效果
 				overrideEvents:['onUploadSuccess','onSelect'],
 				//上传成功之后回显 

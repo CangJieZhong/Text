@@ -47,7 +47,7 @@ public class LoginCheckInterceptor /*implements  HandlerInterceptor*/ extends  H
 			RequireLogin rl = handlerMethod.getMethodAnnotation(RequireLogin.class);
 			//判断是否有该注解
 			if(rl != null && UserContext.getCurrent() == null ){ //说明该方法需要访问控制, 如果登录, 跳转到login.html
-				response.sendRedirect("/login.html");
+				response.sendRedirect("login.html");
 				return false;
 			}
 		}

@@ -17,7 +17,7 @@ public class RealAuthController {
 		return "forward:WEB-INF/views/realAuth.jsp";
 	}
 	
-	@RequestMapping("realAuth_upload")
+	@RequestMapping("realAuth_upload.action")
 	@ResponseBody
 	public String realAuthUpload(MultipartFile file) {
 		String fileName = UploadUtil.upload(file);

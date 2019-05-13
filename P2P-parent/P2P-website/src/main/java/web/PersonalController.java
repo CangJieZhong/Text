@@ -38,11 +38,14 @@ public class PersonalController {
 
 
 	@RequestMapping("/sendPhoneMessage.action")
-	//@ResponseBody
+	@ResponseBody
 	@RequireLogin
-	public void sendPhoneMessage(HttpServletRequest request,
+	public String sendPhoneMessage(HttpServletRequest request,
 			String phoneNumber) throws Exception {
 		// 随机生成6位数的验证码
+		if(request.getSession().getAttribute("userPhoneMsg")!=null){
+			return "请确认你输入的电话号码是否正确!";
+		}else{
 		String checkCode = "";
 		Random random = new Random();
 		for (int i = 0; i < 6; i++) {
@@ -54,10 +57,13 @@ public class PersonalController {
 		// if(result.indexOf("操作成功")!=-1){
 		Map<String, String> userPhoneMsg = new HashMap<String, String>();
 		userPhoneMsg.put("sendMessage", checkCode);
-		System.out.println(checkCode);
 		userPhoneMsg.put("phoneNumber", phoneNumber);
 		request.getSession().setAttribute("userPhoneMsg", userPhoneMsg);
-		// }
+		// }else{
+		//return "发送失败了,请稍后重试!";
+		//}
+		}
+		return null;
 	}
 	@RequestMapping("/savePhoneNumber.action")
 	@ResponseBody

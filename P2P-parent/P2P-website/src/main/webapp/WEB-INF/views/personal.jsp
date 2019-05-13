@@ -48,9 +48,26 @@
 			if (phone.length != 11) {
 				alert("亲,您的电话号码有误!");
 			} else {
+				$("#sendVerifyCode").attr("disabled",true);
 				$.ajax({
-					url : "sendPhoneMessage.action?phoneNumber=" + phone
+					url : "sendPhoneMessage.action?phoneNumber=" + phone,
+					success : function(data) {
+						if(data!=null&&data!=""){
+							alert(data);
+						}
+					}
 				});
+				var sec = 90;
+                var timer = setInterval(function(){
+                    sec--;
+                    if(sec > 0){
+                   	 $("#sendVerifyCode").text(sec+"秒后重新发送验证码");
+                    }else{
+                        clearInterval(timer);
+                        $("#sendVerifyCode").attr("disabled",false);
+                        $("#sendVerifyCode").text("重新发送验证码");
+                    }
+                },1000);
 			}
 		});
 		$("#verifyCode").blur(

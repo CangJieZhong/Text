@@ -11,7 +11,7 @@
 			<li id="index"><a href="/index.do">首页</a></li>
 			<li id="invest"><a href="#">我要投资</a></li>
 			<li id="borrow"><a href="#">我要借款</a></li>
-			<li id="personal"><a href="personal.action">个人中心</a></li>
+			<li id="personal"><a href="/personal.do">个人中心</a></li>
 			<li><a href="#">新手指引</a></li>
 			<li><a href="#">关于我们</a></li>
 		</ul>
