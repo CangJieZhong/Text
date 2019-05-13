@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>蓝源Eloan-P2P平台</title>
 		<%@ include file="common/links-tpl.jsp"%>
-		<link type="text/css" rel="stylesheet" href="/css/account.css" />
-		<script type="text/javascript" src="/js/plugins/uploadify/jquery.uploadify.min.js"></script>
-		<script type="text/javascript" src="/js/plugins/jquery.form.js"></script>
+		<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/css/account.css" />
+		<script type="text/javascript" src="<%=request.getContextPath() %>/js/plugins/uploadify/jquery.uploadify.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath() %>/js/plugins/jquery.form.js"></script>
 		<style type="text/css">
 			#realAuthForm input ,#realAuthForm select{
 				width: 260px;
@@ -60,7 +61,7 @@
 		$(function(){
 			$("#viewExample").popover({
 				html:true,
-				content:'正面<img src="/images/upload_source_2.jpg" class="uploadExample"/><br/>反面<img src="/images/upload_source_2_1.jpg" class="uploadExample"/>',				
+				content:'正面<img src="<%=request.getContextPath() %>/images/upload_source_2.jpg" class="uploadExample"/><br/>反面<img src="<%=request.getContextPath() %>/images/upload_source_2_1.jpg" class="uploadExample"/>',				
 				trigger:"hover",
 				placement:"top"
 			});
@@ -80,12 +81,12 @@
 				fileTypeExts:"*.gif; *.jpg; *.png",
 				multi:false , //是否可以多选上传
 				//指定uploadify的那个falsh文件的位置
-				swf:"/js/plugins/uploadify/uploadify.swf",
+				swf:"<%=request.getContextPath() %>/js/plugins/uploadify/uploadify.swf",
 				//后台用来处理上传文件的地址;
 				uploader:"realAuth_upload.do",
 				//覆盖默认的效果
 				overrideEvents:['onUploadSuccess','onSelect'],
-				//上传成功之后回显 
+				//上传成功之后回显    /uploda/xxxx.jpg
 				onUploadSuccess:function(file,data,response){
 					$("#uploadImg1").attr("src",data) ; 
 					$("#uploadImage1").val(data);
@@ -100,7 +101,7 @@
 				fileTypeExts:"*.gif;*.jpg;*.png",
 				multi:false , //是否可以多选上传
 				//指定uploadify的那个falsh文件的位置
-				swf:"/js/plugins/uploadify/uploadify.swf",
+				swf:"<%=request.getContextPath() %>/js/plugins/uploadify/uploadify.swf",
 				//后台用来处理上传文件的地址;
 				uploader:"realAuth_upload.do",
 				//覆盖默认的效果
@@ -128,7 +129,7 @@
 				<!--导航菜单-->
 				<div class="col-sm-3">
 					<c:set var="currentMenu" value="realAuth"></c:set>
-				<%@ include file="common/leftmenu-tpl.jsp"%>
+				    <%@ include file="common/leftmenu-tpl.jsp"%>
 				</div>
 				<!-- 功能页面 -->
 				<div class="col-sm-9">
@@ -144,7 +145,7 @@
 								<div class="form-group">
 						        	<label class="col-sm-4 control-label ">用户名</label>
 					        		<div class="col-sm-8">
-						        		<p class="form-control-static">${logininfo.username }</p>
+						        		<p class="form-control-static">${current.username }</p>
 						        	</div>
 						        </div>
 								<div class="form-group">

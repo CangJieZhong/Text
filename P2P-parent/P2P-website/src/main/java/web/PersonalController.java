@@ -1,5 +1,9 @@
 package web;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.IPersonalService;
 import util.MailUtil;
+import util.RequireLogin;
 import util.SimpleHttpClient;
 
 @Controller
@@ -22,6 +27,7 @@ public class PersonalController {
 	private IPersonalService personalService;
 	
 	@RequestMapping(path = "/personal.action")
+	@RequireLogin
 	public String personal(HttpServletRequest request) throws Exception {
 		Map<String, Object> map = personalService.queryPersonal();
 		request.setAttribute("account", map.get("account"));
@@ -33,6 +39,7 @@ public class PersonalController {
 
 	@RequestMapping("/sendPhoneMessage.action")
 	//@ResponseBody
+	@RequireLogin
 	public void sendPhoneMessage(HttpServletRequest request,
 			String phoneNumber) throws Exception {
 		// 随机生成6位数的验证码
@@ -54,6 +61,7 @@ public class PersonalController {
 	}
 	@RequestMapping("/savePhoneNumber.action")
 	@ResponseBody
+	@RequireLogin
 	public Map<String, Object> savePhoneNumber(HttpServletRequest request,String code,String phoneNumber) throws Exception{
 		Map<String, Object> map = new HashMap<>();
 		Map<String, String> userPhoneMsg = (Map<String, String>) request.getSession().getAttribute("userPhoneMsg");
@@ -67,18 +75,27 @@ public class PersonalController {
 	}
 	@RequestMapping("/checkEmail.action")
 	@ResponseBody
+	@RequireLogin
 	public Map<String, Object> checkEmail(HttpServletRequest request,String email) throws Exception{
 		return personalService.checkEmail(email);
 	}
 	@RequestMapping("/saveEmail.action")
-	public String saveEmail(HttpServletRequest request,String email,String code) throws Exception{
-		
+	@RequireLogin
+	public String saveEmail(HttpServletRequest request,String email,Date date,String id) throws Exception{
+		LocalDate old = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate now = LocalDate.now();
+		Period pi = Period.between(old, now);
+		int days = pi.getDays();
+		if(days<=5){
 			try {
-				personalService.saveEmail(email,code);
+				personalService.saveEmail(email,id);
 				return "forward:personal.action";
 			} catch (Exception e) {
 				request.setAttribute("error", "系统出现了故障,请稍后重试");
 				return "forward:error.jsp";
 			}
+		}
+		request.setAttribute("error", "验证邮箱时间已经过了五天了,请重新申请!");
+		return "forward:error.jsp";
 	}
 }

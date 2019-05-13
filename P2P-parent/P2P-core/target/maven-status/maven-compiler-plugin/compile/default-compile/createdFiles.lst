@@ -2,13 +2,18 @@ dao\IplogMapper.class
 util\BitStateUtil.class
 util\MD5.class
 util\SystemConst.class
+pojo\Person_Auth.class
 dao\UserinfoMapper.class
 pojo\Account.class
+service\PersonalServiceImpl.class
+util\SimpleHttpClient.class
 exception\LoginInfoException.class
 pojo\BaseEntity.class
 service\ILogininfoService.class
+util\MailUtil$1.class
 pojo\Userinfo.class
 pojo\Iplog.class
+util\MailUtil.class
 pojo\SystemDictionary.class
 pojo\SystemDictionaryItem.class
 service\LogininfoServiceImpl.class
@@ -17,3 +22,4 @@ pojo\Logininfo.class
 dao\AccountMapper.class
 util\UserContext.class
 dao\LogininfoMapper.class
+service\IPersonalService.class

@@ -34,16 +34,6 @@ public class MailUtil {
 		// 发送端口（根据实际情况填写，一般均为25）
 		properties.put("mail.smtp.port", "25");
 		properties.put("mail.smtp.auth", "true");
-		/*
-		 * // 设置邮件服务器主机名 properties.setProperty("mail.host", "smtp.qq.com"); //
-		 * 发送服务器需要身份验证 properties.setProperty("mail.smtp.auth", "true"); //
-		 * 发送邮件协议名称 properties.setProperty("mail.transport.protocol", "smtp");
-		 * 
-		 * // 开启SSL加密，否则会失败 MailSSLSocketFactory sf = new
-		 * MailSSLSocketFactory(); sf.setTrustAllHosts(true);
-		 * properties.put("mail.smtp.ssl.enable", "true");
-		 * properties.put("mail.smtp.ssl.socketFactory", sf);
-		 */
 		// 设置发送邮件的账号和密码
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override

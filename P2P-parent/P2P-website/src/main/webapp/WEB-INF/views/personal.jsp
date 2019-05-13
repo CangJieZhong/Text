@@ -174,25 +174,31 @@
 
 						<div class="row h4 account-info">
 							<div class="col-sm-4">
-								账户总额：<span class="text-primary">${account.usableAmount+account.freezedAmount}元</span>
+								账户总额：<span class="text-primary"><fmt:formatNumber
+										value="${account.usableAmount+account.freezedAmount}" pattern="#.##" />元</span>
 							</div>
 							<div class="col-sm-4">
-								可用金额：<span class="text-primary">${account.usableAmount}元</span>
+								可用金额：<span class="text-primary"><fmt:formatNumber
+										value="${account.usableAmount}" pattern="#.##" />元</span>
 							</div>
 							<div class="col-sm-4">
-								冻结金额：<span class="text-primary">${account.freezedAmount}元</span>
+								冻结金额：<span class="text-primary"><fmt:formatNumber
+										value="${account.freezedAmount}" pattern="#.##" />元</span>
 							</div>
 						</div>
 
 						<div class="row h4 account-info">
 							<div class="col-sm-4">
-								待收利息：<span class="text-primary">${account.unReceiveInterest}元</span>
+								待收利息：<span class="text-primary"><fmt:formatNumber
+										value="${account.unReceiveInterest}" pattern="#.##" />元</span>
 							</div>
 							<div class="col-sm-4">
-								待收本金：<span class="text-primary">${account.unReceivePrincipal}元</span>
+								待收本金：<span class="text-primary"><fmt:formatNumber
+										value="${account.unReceivePrincipal}" pattern="#.##" />元</span>
 							</div>
 							<div class="col-sm-4">
-								待还本息：<span class="text-primary">${account.unReturnAmount}元</span>
+								待还本息：<span class="text-primary"><fmt:formatNumber
+										value="${account.unReturnAmount}" pattern="#.##" />元</span>
 							</div>
 						</div>
 

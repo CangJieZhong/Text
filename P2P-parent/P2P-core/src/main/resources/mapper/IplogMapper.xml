@@ -23,6 +23,9 @@
               ) 
     </insert>
     <select id="querylastLoginTimeById" resultType="java.util.Date">
-    	SELECT MAX(logintime) FROM iplog WHERE logininfoid=#{id}
+    	select loginTime from iplog where username=#{username} and logintype=#{logintype}
+                                        and loginState = #{loginState}
+                                        order by logintime desc
+                                        limit 1,1
     </select>
 </mapper>

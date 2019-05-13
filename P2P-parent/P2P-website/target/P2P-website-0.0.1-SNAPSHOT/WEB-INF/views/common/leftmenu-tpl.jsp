@@ -13,7 +13,7 @@
 		<span class="text-title">我的账户</span></a>
 		<ul class="in">
 			<li name="personal"><a href="#">账户信息</a></li>
-			<li name="realAuth"><a href="/realAuth.do">实名认证</a></li>
+			<li name="realAuth"><a href="realAuth.action">实名认证</a></li>
 			<li name="userFile"><a href="/userFile.do">风控资料认证</a></li>
 			<li name="bankInfo"><a href="#">银行卡管理</a></li>
 			<li name="ipLog"><a href="/ipLog.do">登录记录</a></li>
@@ -29,7 +29,7 @@
 	</li>
 </ul>
 
-<c:if test="${currentMenu}">
+<c:if test="${!empty currentMenu}">
     <script type="text/javascript">
         $(".list-group-item li[name=${currentMenu}]").addClass("active");
     </script>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pojo.Account;
+import pojo.Logininfo;
 import pojo.Person_Auth;
 import pojo.Userinfo;
 import util.BitStateUtil;
@@ -36,7 +37,7 @@ public class PersonalServiceImpl implements IPersonalService {
 				.getId());
 		map.put("account", account);
 		Date lastLoginTime = iplogMapper.querylastLoginTimeById(UserContext
-				.getCurrent().getId());
+				.getCurrent().getUsername(),Logininfo.USERTYPE_NORMAL,Logininfo.STATE_NORMAL);
 		map.put("lastLoginTime", lastLoginTime);
 		Userinfo ui = userinfoMapper.queryUserInfoById(UserContext.getCurrent()
 				.getId());
@@ -67,40 +68,24 @@ public class PersonalServiceImpl implements IPersonalService {
 	}
 
 	@Override
-	public void saveEmail(String email, String code) throws Exception {
-		Map<String, Object> mapMsg = UserContext.getEmailMsg();
-		System.out.println("email="+email+" code="+code);
-		System.out.println("map="+mapMsg.toString());
-		System.out.println("uid="+UserContext.getCurrent().getId());
-		if (mapMsg.get("email").equals(email) && mapMsg.get("code").equals(
-				code)) {
-			long State = userinfoMapper.queryUserInfoById(
-					UserContext.getCurrent().getId()).getBitState();
-			int newrealauthid = BitStateUtil.addState((int) State,
-					BitStateUtil.OP_MAIL_AUTH);
-			userinfoMapper.addEmail(email, newrealauthid, UserContext
-					.getCurrent().getId());
-		}
+	public void saveEmail(String email, String id) throws Exception {
+			long State = userinfoMapper.queryUserInfoById(Long.parseLong(id)).getBitState();
+			int newrealauthid = BitStateUtil.addState((int) State,BitStateUtil.OP_MAIL_AUTH);
+			userinfoMapper.addEmail(email, newrealauthid,Long.parseLong(id));
 	}
-
 	@Override
 	public Map<String, Object> checkEmail(String email) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		int emailCount = userinfoMapper.queryEmailInfo(email);
 		if (emailCount > 0) {
-
 			map.put("success", false);
 			map.put("ErroMsg", "邮箱已被注册,请重新输入邮箱!");
 		} else {
-			String uuid = UUID.randomUUID().toString();
+			Date date = new Date();
 			String url = "http://localhost:8080/P2P-website/saveEmail.action?email="
-					+ email + "&code=" + uuid;
+					+ email + "&date=" + date+"&id="+UserContext.getCurrent().getId();
 			try {
 				MailUtil.send_mail(email, url);
-				Map<String, Object> mapMsg = new HashMap<>();
-				mapMsg.put("email", email);
-				mapMsg.put("code", uuid);
-				UserContext.setEmailMsg(mapMsg);
 				map.put("success", true);
 				map.put("ErroMsg", "邮件发送成功,请去邮箱确认");
 			} catch (Exception e) {

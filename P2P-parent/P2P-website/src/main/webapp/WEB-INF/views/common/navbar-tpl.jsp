@@ -18,7 +18,7 @@
 	</div>
 </div>
 
-<c:if test="${currentNav}">
+<c:if test="${!empty currentNav}">
 <script type="text/javascript">
 	$("#${currentNav}").addClass("active");
 </script>
