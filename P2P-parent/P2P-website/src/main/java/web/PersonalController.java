@@ -44,7 +44,7 @@ public class PersonalController {
 			String phoneNumber) throws Exception {
 		// 随机生成6位数的验证码
 		if(request.getSession().getAttribute("userPhoneMsg")!=null){
-			return "请确认你输入的电话号码是否正确!";
+			return "erro";
 		}else{
 		String checkCode = "";
 		Random random = new Random();

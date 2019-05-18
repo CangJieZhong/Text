@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.RealAuthMapper">
+	<insert id="addRealAuth" parameterType="Realauth">
+		INSERT INTO
+		`p2p`.`realauth` (
+		`id`,
+		`realname`,
+		`sex`,
+		`birthDate`,
+		`idNumber`,
+		`address`,
+		`state`,
+		`image1`,
+		`image2`,
+		`applyTime`,
+		`applier_id`
+		)
+		VALUES
+		(
+		#{id},
+		#{realname},
+		#{sex},
+		#{birthDate},
+		#{idNumber},
+		#{address},
+		#{state},
+		#{image1},
+		#{image2},
+		#{applyTime},
+		#{applier_id}
+		)
+	</insert>
+	<sql id="conditionSql">
+		<where>
+			<if test="vo.state != null and vo.state != -1">
+				and r.state = #{vo.state}
+			</if>
+			<if test="vo.beginDate != null">
+				and r.applyTime >= #{vo.beginDate}
+			</if>
+			<if test="vo.endDate != null">
+				and r.applyTime &lt;= #{vo.endDate}
+			</if>
+			and r.`applier_id` = u1.`id`
+		</where>
+	</sql>
+	<select id="queryAllRealauth" parameterType="QueryVo"
+		resultType="Applier">
+		SELECT t.*,u2.`username` auditorName
+		FROM (
+		SELECT r.*,u1.username applierName FROM realauth r,logininfo u1
+		<include refid="conditionSql"></include>
+		) t LEFT JOIN logininfo u2 ON t.`auditor_id` = u2.`id`
+
+	</select>
+	<update id="addRealAuthStateById">
+	 	UPDATE realauth SET state=#{state},remark=#{remark},auditTime=#{auditTime},auditor_id=#{auditor_id} WHERE id = #{id}
+	</update>
+</mapper>

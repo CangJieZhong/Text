@@ -53,7 +53,7 @@
 					url : "sendPhoneMessage.action?phoneNumber=" + phone,
 					success : function(data) {
 						if(data!=null&&data!=""){
-							alert(data);
+							alert("出错了,请稍后重试!");
 						}
 					}
 				});

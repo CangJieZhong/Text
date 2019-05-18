@@ -24,7 +24,7 @@
 			<span>审核项目</span>
 		</a>
 		<ul class="in" id="auditmanage_detail">
-			<li class="realAuth"><a href="/realAuth.do">实名认证审核</a></li>
+			<li class="realAuth"><a href="realAuth.action">实名认证审核</a></li>
 			<li class="vedioAuth"><a href="#">视频认证审核</a></li>
 			<li class="userFileAuth"><a href="/userFileAuth.do">认证材料审核</a></li>
 			<li class="bidrequest_publishaudit_list"><a href="#">发标前审核</a></li>
@@ -49,7 +49,7 @@
 	</li>
 </ul>
 
-<c:if test="${empty currentMenu }">
+<c:if test="${empty currentMenu}">
 <script type="text/javascript">
 	$(".in li.${currentMenu}").addClass("active");
 </script>

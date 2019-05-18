@@ -30,7 +30,7 @@ $(function(){
 	$("#loginForm").ajaxForm({success:function(data){
 		
 		if(data.success){
-			window.location.href="/index.do";
+			window.location.href="index.action";
 		}else{
 			$.messager.popup(data.msg);
 		}
@@ -55,7 +55,7 @@ $(function(){
 				<div class="form-group form-group-lg">
 					<div class="input-group">
 						<div class="input-group-addon">密&emsp;码</div>
-						<input class="form-control" name="password" type="password" value="1111"/>
+						<input class="form-control" name="password" type="password" value="1234"/>
 					</div>
 				</div>
 				<div class="form-group">

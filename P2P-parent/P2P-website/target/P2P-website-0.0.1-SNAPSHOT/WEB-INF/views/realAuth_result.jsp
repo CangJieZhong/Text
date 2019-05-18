@@ -26,7 +26,7 @@
 			<!-- 功能页面 -->
 			<div class="col-sm-9">
 			    <c:choose>
-			       <c:when test="${auditing }">
+			       <c:when test="${auditing}">
 						<div class="el-tip-info">
 							<h3>实名认证</h3>
 							<p class="text-info">实名认证资料已经提交，等待业务员审核，请耐心等待；如果急需审核请联系客服；</p>
@@ -45,7 +45,7 @@
 									</tr>
 									<tr>
 										<td><span>证件号码： ${realAuth.idNumber}</span></td>
-										<td><span>出生日期：${(realAuth.bornDate)!''}</span></td>
+										<td><span>出生日期：${(realAuth.bornDate)!=''}</span></td>
 									</tr>
 								</table>
 							</div>
@@ -55,7 +55,6 @@
 			</div>
 		</div>
 	</div>
-
 	<%@ include file="common/footer-tpl.jsp" %>	
 </body>
 </html>

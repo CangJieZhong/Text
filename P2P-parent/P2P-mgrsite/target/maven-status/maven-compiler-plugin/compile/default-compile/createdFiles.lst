@@ -1,1 +1,6 @@
+util\ElCommons.class
+interceptor\LoginCheckInterceptor.class
+web\RealAuth.class
+util\UploadUtil.class
 web\UserinfoController.class
+util\RequireLogin.class

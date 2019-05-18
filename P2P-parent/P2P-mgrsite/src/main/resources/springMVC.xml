@@ -32,4 +32,11 @@
 	</bean>
     <!-- 扫描注解 -->
     <context:component-scan base-package="web"/>
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="interceptor.LoginCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

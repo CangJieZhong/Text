@@ -16,10 +16,10 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- 扫描注解 -->
-	<context:component-scan base-package="dao,service" />
+	<context:component-scan base-package="dao,service,util" />
 	<!-- 加载文件 -->
 	<context:property-placeholder
-		file-encoding="UTF-8" location="classpath:db.properties" />
+		file-encoding="UTF-8" location="classpath:db.properties,classpath:Redis.properties" />
 	<!-- 使用c3p0连接池的数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<!-- C3p0的属性注入 -->
@@ -40,6 +40,19 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<!-- 加载Mapper映射文件 -->
 		<property name="mapperLocations"  value="classpath*:/mapper/*Mapper.xml"></property>
+		<!-- 配置分页插件 -->
+		<!-- <property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property> -->
 	</bean>
 	
 	
@@ -92,4 +105,7 @@
 		<!--织入 将事务增强与切入点组合 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
 	</aop:config>
+	
+	<!-- 导入Redis配置文件 -->
+	<import resource="classpath:applicationContext-redis.xml"/>
 </beans>

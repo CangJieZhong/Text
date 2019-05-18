@@ -13,6 +13,19 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
+	<jsp-config>
+		<taglib>
+			<!-- 配置标签的引用地址 JSP页面中引用时使用 -->
+			<taglib-uri>el-common</taglib-uri>
+			<!-- 配置标签的TLD文件地址 -->
+			<taglib-location>/WEB-INF/el-common.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+
+
+
+
 	<!-- 配置一个创建Spring容器的监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -52,8 +65,8 @@
 		</init-param>
 	</filter>
 
-    <filter-mapping>
-        <filter-name>CharacterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
