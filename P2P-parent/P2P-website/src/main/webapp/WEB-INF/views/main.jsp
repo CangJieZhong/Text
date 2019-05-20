@@ -6,12 +6,25 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>蓝源Eloan-P2P平台</title>
 		<%@ include file="common/links-tpl.jsp"  %>
+		<link rel="stylesheet" href="js/bootstrap-3.3.2-dist/css/bootstrap.css"
+	type="text/css" />
+<link rel="stylesheet" href="css/core.css" type="text/css" />
+<script type="text/javascript" src="js/jquery/jquery-2.1.3.js"></script>
+<script type="text/javascript"
+	src="js/bootstrap-3.3.2-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery.bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="js/plugins/jquery-validation/jquery.validate.js"></script>
+<script type="text/javascript"
+	src="js/plugins/jquery-validation/localization/messages_zh.js"></script>
+<script type="text/javascript" src="js/plugins/jquery.form.js"></script>
+		
 	</head>
 	<body>
 	
 		<!-- 网页顶部导航 -->
-		<%@ include file="common/head-tpl.jsp" %>
-		<!-- 网页导航 -->
+	<%@ include file="common/head-tpl.jsp"%>
+	<!-- 网页导航 -->
 		<c:set var="currentNav" value="index"></c:set>
 		<%@ include file="common/navbar-tpl.jsp" %>
 		

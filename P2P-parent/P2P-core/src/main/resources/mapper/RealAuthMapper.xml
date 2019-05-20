@@ -58,4 +58,10 @@
 	<update id="addRealAuthStateById">
 	 	UPDATE realauth SET state=#{state},remark=#{remark},auditTime=#{auditTime},auditor_id=#{auditor_id} WHERE id = #{id}
 	</update>
+	<select id="queryById" resultType="Realauth">
+		select * from realauth WHERE id=#{id}
+	</select>
+	<select id="queryByUid" resultType="Realauth">
+		SELECT * FROM realauth WHERE applier_id=#{applier_id} AND (state = 1 OR  state = 0)
+	</select>
 </mapper>

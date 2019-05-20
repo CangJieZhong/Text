@@ -23,7 +23,7 @@ public class UserinfoController {
 	public JsonResult  login(String username,String password,HttpServletRequest request) throws Exception{
 		JsonResult json = new JsonResult();
 		try {
-			boolean isOk = logininfoService.login(username, password, Logininfo.USERTYPE_NORMAL, request.getRemoteAddr());
+			boolean isOk = logininfoService.login(username, password, Logininfo.USERTYPE_SYSTEM, request.getRemoteAddr());
 			if(isOk == false){
 				json.setSuccess(false);
 				json.setMsg("用户名或者密码错误");

@@ -52,4 +52,12 @@
 	<update id="addEmail">
 		UPDATE userinfo SET email =#{email} , bitState=#{state} WHERE id=#{id}
 	</update>
+	<update id="addRealauthid" parameterType="AddRealAuth">
+		UPDATE userinfo SET 
+		realauthid = #{realauth_id},
+		bitState=#{newRealauthid},
+		realName=#{realName},
+		idNumber=#{idNumber}
+		WHERE id =#{userId}
+	</update>
 </mapper>

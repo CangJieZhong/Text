@@ -40,12 +40,19 @@
 								<hr />
 								<table style="width: 100%; height: 100px;">
 									<tr>
-										<td><span>真实姓名： ${realAuth.realName}</span></td>
-										<td><span>性别：${realAuth.sexDisplay}</span></td>
+										<td><span>真实姓名： ${realAuth.realname}</span></td>
+										<td><span>性别：<c:choose>
+										<c:when test="${realAuth.sex==0}">
+											男
+										</c:when>
+										<c:otherwise>
+											女
+										</c:otherwise>
+									</c:choose></span></td>
 									</tr>
 									<tr>
 										<td><span>证件号码： ${realAuth.idNumber}</span></td>
-										<td><span>出生日期：${(realAuth.bornDate)!=''}</span></td>
+										<td><span>出生日期：${realAuth.birthDate}</span></td>
 									</tr>
 								</table>
 							</div>

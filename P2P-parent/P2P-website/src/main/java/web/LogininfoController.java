@@ -56,4 +56,8 @@ public class LogininfoController {
 		}
 		return json;
 	}
+	@RequestMapping("/tomain.action")
+	public String toMain(){
+		return "forward:WEB-INF/views/main.jsp";
+	}
 }

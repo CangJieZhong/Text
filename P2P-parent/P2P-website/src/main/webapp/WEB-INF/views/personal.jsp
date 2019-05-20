@@ -231,12 +231,12 @@
 											<c:choose>
 												<c:when test="${person_Auth.real_Auth}">
 													<p>
-														已认证 <a href="#">查看</a>
+														已认证 <a href="realAuth.action">查看</a>
 													</p>
 												</c:when>
 												<c:otherwise>
 													<p>
-														未认证 <a href="#">马上认证 </a>
+														未认证 <a href="realAuth.action">马上认证 </a>
 													</p>
 												</c:otherwise>
 											</c:choose>
