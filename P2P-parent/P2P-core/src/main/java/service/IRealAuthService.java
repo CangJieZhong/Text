@@ -6,7 +6,11 @@ import com.github.pagehelper.PageInfo;
 
 import pojo.QueryVo;
 import pojo.Realauth;
-
+/**
+ * 认证模块
+ * @author cangjie
+ *
+ */
 public interface IRealAuthService {
 	/**
 	 * 保存一个实名认证信息

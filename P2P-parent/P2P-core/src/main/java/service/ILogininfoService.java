@@ -1,7 +1,11 @@
 package service;
 
 import exception.LoginInfoException;
-
+/**
+ * 用户模块
+ * @author cangjie
+ *
+ */
 public interface ILogininfoService {
 	/**
 	 * 登录

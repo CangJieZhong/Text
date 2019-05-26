@@ -7,8 +7,10 @@ public class SystemConst {
 	public static final BigDecimal ZERO = new BigDecimal("0.0000");
 	public static final BigDecimal INITIAL_BORROW_LIMIT = new BigDecimal(
 			"2000.0000");
-	// 图片公共文件夹
-	public static final String PUBLIC_IMG_PATH = "D:/upload/p2p/website";
-	// 验证码有效时间
+	
+	//图片公共文件夹
+	public static final String PUBLIC_IMG_PATH ="D:/upload/p2p/website";
+	
+	//验证码有效时间
 	public static final int VERIFYCODE_VALIDATE_TIME = 5 * 60;
 }

@@ -5,7 +5,11 @@ import java.util.Map;
 
 import pojo.QueryVo;
 import pojo.Realauth;
-
+/**
+ * 个人信息模块
+ * @author cangjie
+ *
+ */
 public interface IPersonalService {
 	/**
 	 * 获取个人信息及认证状态

@@ -51,17 +51,17 @@ public class PersonalController {
 		for (int i = 0; i < 6; i++) {
 			checkCode += random.nextInt(10);
 		}
-		// String result = SimpleHttpClient.sendPhoneMessage(phoneNumber,
-		// checkCode);
+		 String result = SimpleHttpClient.sendPhoneMessage(phoneNumber,
+		 checkCode);
 		request.getSession().removeAttribute("sendMessage");
-		// if(result.indexOf("操作成功")!=-1){
+		 if(result.indexOf("操作成功")!=-1){
 		Map<String, String> userPhoneMsg = new HashMap<String, String>();
 		userPhoneMsg.put("sendMessage", checkCode);
 		userPhoneMsg.put("phoneNumber", phoneNumber);
 		request.getSession().setAttribute("userPhoneMsg", userPhoneMsg);
-		// }else{
-		//return "发送失败了,请稍后重试!";
-		//}
+		 }else{
+		return "发送失败了,请稍后重试!";
+		}
 		}
 		return null;
 	}

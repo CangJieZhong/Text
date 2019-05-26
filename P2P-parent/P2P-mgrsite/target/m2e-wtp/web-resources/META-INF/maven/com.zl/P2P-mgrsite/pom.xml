@@ -49,27 +49,23 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 		</dependency>
-
-		<!-- p2p-core 依赖 -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>P2P-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<!-- 分页PageHelper -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
-			<version>4.1.6</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<!-- fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.47</version>
 		</dependency>
-
+		<!-- p2p-core 依赖 -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>P2P-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 	</dependencies>
 

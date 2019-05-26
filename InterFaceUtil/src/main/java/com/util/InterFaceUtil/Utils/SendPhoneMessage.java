@@ -1,4 +1,5 @@
-package util;
+package com.util.InterFaceUtil.Utils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-public class SimpleHttpClient {
+public class SendPhoneMessage {
 	public static String sendPhoneMessage(String phoneNumber,String checkCode) throws Exception{
 		String body = "";
 
@@ -58,3 +59,4 @@ public class SimpleHttpClient {
         return body;
     }
 }
+

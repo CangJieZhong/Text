@@ -2,9 +2,15 @@ package pojo;
 
 import java.io.Serializable;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+/**
+ * 添加状态实体类
+ * @author cangjie
+ *
+ */
 @Setter
 @Getter
 @ToString
