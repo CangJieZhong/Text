@@ -29,7 +29,7 @@
 		<lombok.version>1.16.22</lombok.version>
 		<httpclient.version>4.5.6</httpclient.version>
 		<pagehelper.version>4.1.6</pagehelper.version>
-		<fastjson.version>1.2.47</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 		<jedis.version>2.8.1</jedis.version>
 	</properties>
 	<dependencyManagement>
